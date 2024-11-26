@@ -316,8 +316,8 @@ def finish_masking(event):
     print("Saving takes about 1 second per an image file")
 
     for water_year in list_wy:
-        # Create folders for each water year
-        wy_dest = folder_path + "/" + "WY" + str(water_year)
+        # Create folders for each water year in munged folder 
+        wy_dest = munged_path + "/" + "WY" + str(water_year)
         if not os.path.exists(wy_dest):
             os.mkdir(wy_dest)
         # loop through index of image_file_objects and save original images with their mask
@@ -385,7 +385,8 @@ def get_mask_poly_verts(image, poly_verts, on_original=False):
 # Sample Image Local Watershed Folder (eg. W1)
 # change this folder path 
 #folder_path = r"../../data/munged/W3"
-folder_path = r"C:\Users\athellma\OneDrive - University of North Carolina at Chapel Hill\Documents\Duke University\Research\_HBEF\CameraTrapAnalysis\hbwater_cameratrap_pheno\data\munged\W3"
+folder_path = "C:\Users\athellma\OneDrive - University of North Carolina at Chapel Hill\Documents\Duke University\Research\_HBEF\CameraTrapAnalysis\hbwater_cameratrap_pheno\data\raw\W9"
+munged_path = "C:\Users\athellma\OneDrive - University of North Carolina at Chapel Hill\Documents\Duke University\Research\_HBEF\CameraTrapAnalysis\hbwater_cameratrap_pheno\data\munged\W9"
 
 # Read paths to all the images into image_folder list
 image_folder = glob2.glob(folder_path + "/*")

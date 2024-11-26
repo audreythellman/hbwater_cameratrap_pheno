@@ -6,15 +6,20 @@
 .ipynb_checkpoints
 .vscode
 .idea
-data_der/
-data_der.zip
-data_der/training_data/
+
+#folders to ignore
+data/
+example_data/
+scripts/sandbox/ML/example_data/
+
+#other files to ignore
 *.DS_Store
 *.pyc
-scripts/sandbox/ML/example_data/*.jpg
 # Byte-compiled / optimized / DLL files
 **/__pycache__
 *.py[cod]
 *.jpg
-data/munged/
-example_data/
+*.png
+
+#ignore non-compressed model
+model.joblib
