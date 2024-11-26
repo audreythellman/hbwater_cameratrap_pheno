@@ -11,9 +11,10 @@ drive_auth()
 drive_find(n_max = 30)
 
 shared_ID <- shared_drive_find(n_max = 30)[1,]$id
-drive_find(pattern = "labeled_image_files", n_max = 30, shared_drive = shared_ID) #find this data file
-(input_data_folder <- drive_ls(as_id("19DyxgtprkcqbDBuKmMioJg6B86oXDa9K")))
-images_folder <- drive_ls(as_id("1B5DN4tE4i-WF-ZikgN3DTnUDNx8xYEAL")) #don't print, it's too many files
+drive_find(pattern = "labeled_image_files_v2", n_max = 60, shared_drive = shared_ID) #find this data file
+#https://drive.google.com/drive/folders/1d-I8MV_3pfFTEXCscRaCyg7NpMTMx5P6?usp=sharing
+(input_data_folder <- drive_ls(as_id("1d-I8MV_3pfFTEXCscRaCyg7NpMTMx5P6")))
+images_folder <- drive_ls(as_id("1i2PIwYRglwnIpZOUaPuaihr-K1-rGWp5")) #don't print, it's too many files
 images_folder$name
 
 #df = data.frame(x = images_folder$name[1:10])
@@ -35,25 +36,23 @@ create_filelist_internal <- function(image_name){
 
 w1 <- create_filelist_internal(images_folder$name)
 w6 <- create_filelist_internal(images_folder$name)
-head(w1)
-w6$val <- 1
+ws <- create_filelist_internal(images_folder$name)
 
-w6_filled <- merge(data.frame(date = seq.Date(min(w6$date, na.rm = TRUE), max(w6$date, na.rm = TRUE), by = "day")), w6, all.x = TRUE) 
-view(w1_filled)
+w6$val <- 1
+w9$val <- 1
+
+filled <- merge(data.frame(date = seq.Date(min(ws$date, na.rm = TRUE), max(ws$date, na.rm = TRUE), by = "day")), ws, all.x = TRUE) 
+View(filled)
 
 library(dplyr)
 
-dups = w6 %>% 
+dups = ws %>% 
 group_by(date) %>%
 filter(year %in% c(2020,2021)) %>%
 summarise(n = length(date)) %>%
 filter(n >1)
 
-dups = w1 %>% 
-group_by(date) %>%
-filter(year %in% c(2020,2021)) %>%
-summarise(n = length(date)) %>%
-filter(n >1)
+dups
 
 #This is the original create list files for xROI
 create_filelist <- function(projdir_image, folder) {
